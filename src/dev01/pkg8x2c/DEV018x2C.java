@@ -62,7 +62,7 @@ public class DEV018x2C extends PApplet {
 
     @Override
     public void settings() {
-        size(750, 750);
+        size(800, 800);
     }
 
     @Override
@@ -74,11 +74,11 @@ public class DEV018x2C extends PApplet {
     //Convert size window with min and max values to fit in.
     public void Convert(double d1, double d2, int minX, int maxX, int minY, int maxY, int beginX, int beginY) {
         try {
-            float pointA = map((float) d1, minX, maxX, beginX, (beginX+250));
-            float pointB = map((float) d2, maxY, minY, beginY, (beginY+250));
+            float pointA = map((float) d1, minX, maxX, beginX, (beginX+200));
+            float pointB = map((float) d2, maxY, minY, beginY, (beginY+200));
 
             //Create point on map with x and y
-            ellipse(pointA, pointB, 6, 6);
+            ellipse(pointA, pointB, 4, 4);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,40 +132,41 @@ public class DEV018x2C extends PApplet {
     public void draw() {
         int x = 0;
         int y = 0;
-        int sizeX = 250;
-        int sizeY = 250;
+        int sizeX = 200;
+        int sizeY = 200;
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 16; i++) {
             fill(255, 255, 255);            //Create white rectangle
-            rect(x, y, sizeX, sizeY);       //Create rectangle of size 250x250 at (250, 0)
+            rect(x, y, sizeX, sizeY);       //Create rectangle of size 200x200 at (200, 0)
 
-            x = x + 250;                    //After creating rectangle go 250 pixels to right;
+            x = x + 200;                    //After creating rectangle go 200 pixels to right;
 
-            //if 3 rectangles next eachother, x = 0 and go down 250 pixels
-            if (x == 750) {
+            //if 4 rectangles next eachother, x = 0 and go down 200 pixels
+            if (x == 800) {
                 x = 0;
-                y = y + 250;
+                y = y + 200;
             }
 
             // if 9 rectangles are made, stop;
-            if (y == 750) {
+            if (y == 800) {
                 break;
             }
         }
 
         //CREATE TEXT
         fill(0, 0, 0);              //Create black text
-        text("ANA", 100, 125);      //Text
-        text("DEV", 350, 375);      //Text
-        text("PRJ", 600, 625);      //Text
+        text("ANA", 75, 100);      //Text
+        text("DEV", 275, 300);      //Text
+        text("PRJ", 475, 500);      //Text
+        text("SKL", 675, 700);      //Text
         textSize(30);               //TextSize
         
         int ROW1 = 0;   
-        int ROW2 = 250;      
-        int ROW3 = 500; 
+        int ROW2 = 200;      
+        int ROW3 = 400; 
         int COLUMN1 = 0;   
-        int COLUMN2 = 250;      
-        int COLUMN3 = 500;    
+        int COLUMN2 = 200;      
+        int COLUMN3 = 400;    
         
         //createScatter( ArrayX, ArrayY, ROW, COLUMN )
         createScatter(ANA, DEV, ROW1, COLUMN2);      //ROW 1 COLUMN 2
