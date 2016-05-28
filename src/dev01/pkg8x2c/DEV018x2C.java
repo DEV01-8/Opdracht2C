@@ -164,13 +164,30 @@ public class DEV018x2C extends PApplet {
         int ROW1 = 0;   
         int ROW2 = 200;      
         int ROW3 = 400; 
+        int ROW4 = 600; 
         int COLUMN1 = 0;   
         int COLUMN2 = 200;      
         int COLUMN3 = 400;    
+        int COLUMN4 = 600;    
+
         
-        //createScatter( ArrayX, ArrayY, ROW, COLUMN )
-        createScatter(ANA, DEV, ROW1, COLUMN2);      //ROW 1 COLUMN 2
-        createScatter(DEV, ANA, ROW2, COLUMN1);    //ROW 2 COLUMN 1
+        //createScatter( ArrayX, ArrayY, COLUMN, ROW )
+        createScatter(DEV, ANA, COLUMN2, ROW1);    //ROW 1 COLUMN 2
+        createScatter(PRJ, ANA, COLUMN3, ROW1);    //ROW 1 COLUMN 3
+        createScatter(SKL, ANA, COLUMN4, ROW1);    //ROW 1 COLUMN 4
+        
+        createScatter(ANA, DEV, COLUMN1, ROW2);    //ROW 2 COLUMN 1
+        createScatter(ANA, PRJ, COLUMN1, ROW3);    //ROW 3 COLUMN 1
+        createScatter(ANA, SKL, COLUMN1, ROW4);    //ROW 4 COLUMN 1
+        
+        createScatter(PRJ, DEV, COLUMN3, ROW2);    //ROW 2 COLUMN 3
+        createScatter(SKL, DEV, COLUMN4, ROW2);    //ROW 2 COLUMN 4
+        
+        createScatter(DEV, PRJ, COLUMN2, ROW3);    //ROW 3 COLUMN 2
+        createScatter(DEV, SKL, COLUMN2, ROW4);    //ROW 4 COLUMN 2
+        
+        createScatter(SKL, PRJ, COLUMN4, ROW3);    //ROW 3 COLUMN 4
+        createScatter(PRJ, SKL, COLUMN3, ROW4);    //ROW 4 COLUMN 3
     }
 
     public static void main(String[] args) {
