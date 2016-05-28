@@ -74,10 +74,11 @@ public class DEV018x2C extends PApplet {
     //Convert size window with min and max values to fit in.
     public void Convert(double d1, double d2, int minX, int maxX, int minY, int maxY, int beginX, int beginY) {
         try {
-            float pointA = map((float) d1, minX, maxX, beginX, (beginX+200));
-            float pointB = map((float) d2, maxY, minY, beginY, (beginY+200));
+            float pointA = map((float) d1, minX, maxX, beginX, (beginX + 200));
+            float pointB = map((float) d2, maxY, minY, beginY, (beginY + 200));
 
             //Create point on map with x and y
+            fill(0, 0, 0);
             ellipse(pointA, pointB, 4, 4);
 
         } catch (Exception e) {
@@ -155,44 +156,59 @@ public class DEV018x2C extends PApplet {
 
         //CREATE TEXT
         fill(0, 0, 0);              //Create black text
+        textSize(30);               //TextSize
         text("ANA", 75, 100);      //Text
         text("DEV", 275, 300);      //Text
         text("PRJ", 475, 500);      //Text
         text("SKL", 675, 700);      //Text
-        textSize(30);               //TextSize
-        
-        int ROW1 = 0;   
-        int ROW2 = 200;      
-        int ROW3 = 400; 
-        int ROW4 = 600; 
-        int COLUMN1 = 0;   
-        int COLUMN2 = 200;      
-        int COLUMN3 = 400;    
-        int COLUMN4 = 600;    
 
-        
+        int ROW1 = 0;
+        int ROW2 = 200;
+        int ROW3 = 400;
+        int ROW4 = 600;
+        int COLUMN1 = 0;
+        int COLUMN2 = 200;
+        int COLUMN3 = 400;
+        int COLUMN4 = 600;
+
         //createScatter( ArrayX, ArrayY, COLUMN, ROW )
         createScatter(DEV, ANA, COLUMN2, ROW1);    //ROW 1 COLUMN 2
         createScatter(PRJ, ANA, COLUMN3, ROW1);    //ROW 1 COLUMN 3
         createScatter(SKL, ANA, COLUMN4, ROW1);    //ROW 1 COLUMN 4
-        
+
         createScatter(ANA, DEV, COLUMN1, ROW2);    //ROW 2 COLUMN 1
         createScatter(ANA, PRJ, COLUMN1, ROW3);    //ROW 3 COLUMN 1
         createScatter(ANA, SKL, COLUMN1, ROW4);    //ROW 4 COLUMN 1
-        
+
         createScatter(PRJ, DEV, COLUMN3, ROW2);    //ROW 2 COLUMN 3
         createScatter(SKL, DEV, COLUMN4, ROW2);    //ROW 2 COLUMN 4
-        
+
         createScatter(DEV, PRJ, COLUMN2, ROW3);    //ROW 3 COLUMN 2
         createScatter(DEV, SKL, COLUMN2, ROW4);    //ROW 4 COLUMN 2
-        
+
         createScatter(SKL, PRJ, COLUMN4, ROW3);    //ROW 3 COLUMN 4
         createScatter(PRJ, SKL, COLUMN3, ROW4);    //ROW 4 COLUMN 3
+        
+        //ROW 1 COLUMN 2
+        fill(255, 0, 0);
+        textSize(11);
+        text(3, 205, 194);
+        text(6, 285, 194);
+        text(9, 385, 194);
+        
+        //ROW 2 COLUMN 1
+        fill(255, 0, 0);
+        textSize(11);
+        text(3, 2, 215);
+        text(6, 2, 300);
+        text(9, 2, 385);
+       
     }
 
     public static void main(String[] args) {
         PApplet.main(new String[]{DEV018x2C.class.getName()});
         ReadText();
+       
     }
 
 }
