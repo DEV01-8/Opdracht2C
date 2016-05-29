@@ -248,9 +248,6 @@ public class DEV018x2C extends PApplet {
     public static void main(String[] args) {
         PApplet.main(new String[]{DEV018x2C.class.getName()});
         ReadText();
-        System.out.println("Minimum PRJ: " + getMin(PRJ));
-        System.out.println("Maximum PRJ: " + getMax(PRJ));
-
     }
 
 }
