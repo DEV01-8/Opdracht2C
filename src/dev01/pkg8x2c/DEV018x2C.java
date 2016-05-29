@@ -63,6 +63,7 @@ public class DEV018x2C extends PApplet {
     @Override
     public void settings() {
         size(800, 800);
+        smooth(4);
     }
 
     @Override
@@ -86,30 +87,26 @@ public class DEV018x2C extends PApplet {
         }
     }
 
-    //Get maximum value of ArrayList with type Double
-    public int getMax(ArrayList<Double> list) {
-        int max = (int) Double.MIN_VALUE;
-        for (double ds : list) {
-            for (double d : list) {
-                if (d > max) {
-                    max = (int) d;
-                }
+    //Find maximum (largest) value in array using loop
+    public static int getMax(ArrayList<Double> numbers) {
+        int maxValue = numbers.get(0).intValue();
+        for (int i = 1; i < numbers.size(); i++) {
+            if (numbers.get(i) > maxValue) {
+                maxValue = numbers.get(i).intValue();
             }
         }
-        return max;
+        return maxValue;
     }
 
-    //Get minimum value of ArrayList with type Double
-    public int getMin(ArrayList<Double> list) {
-        int min = (int) Double.MAX_VALUE;
-        for (double ds : list) {
-            for (double d : list) {
-                if (d < min) {
-                    min = (int) d;
-                }
+    //Find minimum (lowest) value in array using loop
+    public static int getMin(ArrayList<Double> numbers) {
+        int minValue = numbers.get(0).intValue();
+        for (int i = 1; i < numbers.size(); i++) {
+            if (numbers.get(i) < minValue) {
+                minValue = numbers.get(i).intValue();
             }
         }
-        return min;
+        return minValue;
     }
 
     public void createScatter(ArrayList<Double> X, ArrayList<Double> Y, int beginX, int beginY) {
@@ -119,7 +116,7 @@ public class DEV018x2C extends PApplet {
             int minY = getMin(Y);
             int maxX = getMax(X);
             int maxY = getMax(Y);
-
+            
             for (int i = 0; i < Y.size(); i++) {
                 Convert(X.get(i), Y.get(i), minX, maxX, minY, maxY, beginX, beginY);
             }
@@ -189,26 +186,71 @@ public class DEV018x2C extends PApplet {
         createScatter(SKL, PRJ, COLUMN4, ROW3);    //ROW 3 COLUMN 4
         createScatter(PRJ, SKL, COLUMN3, ROW4);    //ROW 4 COLUMN 3
         
+        /* Numbers axes ANA */
+        int minANA = getMin(ANA);
+        int maxANA = getMax(ANA);
+        int halfANA = (maxANA + minANA) / 2;
+
         //ROW 1 COLUMN 2
-        fill(255, 0, 0);
-        textSize(11);
-        text(3, 205, 194);
-        text(6, 285, 194);
-        text(9, 385, 194);
-        
+        fill(0, 0, 255);
+        textSize(13);
+        text(minANA, 205, 194);
+        text(halfANA, 285, 194);
+        text(maxANA, 385, 194);
+
         //ROW 2 COLUMN 1
-        fill(255, 0, 0);
-        textSize(11);
-        text(3, 2, 215);
-        text(6, 2, 300);
-        text(9, 2, 385);
-       
+        fill(0, 0, 255);
+        textSize(13);
+        text(minANA, 2, 215);
+        text(halfANA, 2, 300);
+        text(maxANA, 2, 385);
+        
+        /* Numbers axes DEV */
+        int minDEV = getMin(DEV);
+        int maxDEV = getMax(DEV);
+        int halfDEV = (maxDEV + minDEV) / 2;
+
+        //ROW 2 COLUMN 3
+        fill(0, 0, 255);
+        textSize(13);
+        text(minDEV, 405, 394);
+        text(halfDEV, 485, 394);
+        text(maxDEV, 585, 394);
+
+        //ROW 3 COLUMN 2
+        fill(0, 0, 255);
+        textSize(13);
+        text(minDEV, 202, 415);
+        text(halfDEV, 202, 499);
+        text(maxDEV, 202, 585);
+        
+        /* Numbers axes PRJ */
+        int minPRJ = getMin(PRJ);
+        int maxPRJ = getMax(PRJ);
+        int halfPRJ = (maxPRJ + minPRJ) / 2;
+
+        //ROW 3 COLUMN 4 
+        fill(0, 0, 255);
+        textSize(13);
+        text(minPRJ, 605, 594);
+        text(halfPRJ, 685, 594);
+        text(maxPRJ, 780, 594);
+
+        //ROW 4 COLUMN 3
+        fill(0, 0, 255);
+        textSize(13);
+        text(minPRJ, 402, 613);
+        text(halfPRJ, 402, 694);
+        text(maxPRJ, 402, 780);
+
     }
 
     public static void main(String[] args) {
         PApplet.main(new String[]{DEV018x2C.class.getName()});
         ReadText();
-       
+        System.out.println("Minimum PRJ: " + getMin(PRJ));
+        System.out.println("Maximum PRJ: " + getMax(PRJ));
+
     }
 
 }
