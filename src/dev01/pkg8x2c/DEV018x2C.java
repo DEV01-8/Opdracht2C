@@ -10,6 +10,7 @@ package dev01.pkg8x2c;
  * @author Johan Bos
  */
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -21,35 +22,24 @@ import processing.core.PApplet;
  */
 public class DEV018x2C extends PApplet {
 
-    public static ArrayList<Integer> studentNR = new ArrayList<>();
-    public static ArrayList<Integer> leeftijd = new ArrayList<>();
-    public static ArrayList<Double> ANA = new ArrayList<>();
-    public static ArrayList<Double> DEV = new ArrayList<>();
-    public static ArrayList<Double> PRJ = new ArrayList<>();
-    public static ArrayList<Double> SKL = new ArrayList<>();
+    private final ArrayList<Double> ANA = new ArrayList<>();
+    private final ArrayList<Double> DEV = new ArrayList<>();
+    private final ArrayList<Double> PRJ = new ArrayList<>();
+    private final ArrayList<Double> SKL = new ArrayList<>();
 
     //Read text file and place columns in Arraylists
-    public static void ReadText() {
+    private void readText() {
         try {
             //Read text file
-            BufferedReader br = new BufferedReader(new FileReader("C:\\studentcijfers.txt"));
+            File path = new File("C:\\studentcijfers.txt");
+            BufferedReader br = new BufferedReader(new FileReader(path));
 
             br.readLine(); // This will read the first line
             String line1 = null;    //Skip first line
             DecimalFormat decimalFormat = new DecimalFormat("#");
 
-            //Clear Arraylists for correct order
-            studentNR.clear();
-            leeftijd.clear();
-            ANA.clear();
-            DEV.clear();
-            PRJ.clear();
-            SKL.clear();
-
             while ((line1 = br.readLine()) != null) {
                 String[] columns = line1.split("\t");
-                studentNR.add(decimalFormat.parse(columns[0]).intValue());
-                leeftijd.add(decimalFormat.parse(columns[1]).intValue());
                 ANA.add(decimalFormat.parse(columns[2]).doubleValue());
                 DEV.add(decimalFormat.parse(columns[3]).doubleValue());
                 PRJ.add(decimalFormat.parse(columns[4]).doubleValue());
@@ -70,25 +60,21 @@ public class DEV018x2C extends PApplet {
     public void setup() {
         //Set Title
         surface.setTitle("Scatterplot");
+        readText();
     }
 
     //Convert size window with min and max values to fit in.
-    public void Convert(double d1, double d2, int minX, int maxX, int minY, int maxY, int beginX, int beginY) {
-        try {
+    private void convert(double d1, double d2, int minX, int maxX, int minY, int maxY, int beginX, int beginY) {
             float pointA = map((float) d1, minX, maxX, beginX, (beginX + 200));
             float pointB = map((float) d2, maxY, minY, beginY, (beginY + 200));
 
             //Create point on map with x and y
             fill(0, 0, 0);
             ellipse(pointA, pointB, 4, 4);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     //Find maximum (largest) value in array using loop
-    public static int getMax(ArrayList<Double> numbers) {
+    private int getMax(ArrayList<Double> numbers) {
         int maxValue = numbers.get(0).intValue();
         for (int i = 1; i < numbers.size(); i++) {
             if (numbers.get(i) > maxValue) {
@@ -99,7 +85,7 @@ public class DEV018x2C extends PApplet {
     }
 
     //Find minimum (lowest) value in array using loop
-    public static int getMin(ArrayList<Double> numbers) {
+    private int getMin(ArrayList<Double> numbers) {
         int minValue = numbers.get(0).intValue();
         for (int i = 1; i < numbers.size(); i++) {
             if (numbers.get(i) < minValue) {
@@ -109,21 +95,16 @@ public class DEV018x2C extends PApplet {
         return minValue;
     }
 
-    public void createScatter(ArrayList<Double> X, ArrayList<Double> Y, int beginX, int beginY) {
+    private void createScatter(ArrayList<Double> X, ArrayList<Double> Y, int beginX, int beginY) {
         //Insert points to create scatter
-        try {
             int minX = getMin(X);
             int minY = getMin(Y);
             int maxX = getMax(X);
             int maxY = getMax(Y);
             
             for (int i = 0; i < Y.size(); i++) {
-                Convert(X.get(i), Y.get(i), minX, maxX, minY, maxY, beginX, beginY);
+                convert(X.get(i), Y.get(i), minX, maxX, minY, maxY, beginX, beginY);
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -247,7 +228,6 @@ public class DEV018x2C extends PApplet {
 
     public static void main(String[] args) {
         PApplet.main(new String[]{DEV018x2C.class.getName()});
-        ReadText();
     }
 
 }
